@@ -7,7 +7,6 @@
     "dev": "vite",
     "build": "vite build --base/sas/",
     "preview": "vite preview",
-    "lint:js": "eslint .",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
