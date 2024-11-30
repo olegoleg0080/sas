@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --base/sas/",
     "preview": "vite preview",
-    "lint:js": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint:js": "eslint ."
   },
   "dependencies": {
     "@babel/plugin-transform-class-properties": "^7.25.9",
