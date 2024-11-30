@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vite build --base/sas/",
     "preview": "vite preview",
-    "lint:js": "eslint ."
+    "lint:js": "eslint .",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@babel/plugin-transform-class-properties": "^7.25.9",
