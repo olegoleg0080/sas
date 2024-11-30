@@ -12,11 +12,6 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
-    "@babel/plugin-transform-class-properties": "^7.25.9",
-    "@babel/plugin-transform-nullish-coalescing-operator": "^7.25.9",
-    "@babel/plugin-transform-numeric-separator": "^7.25.9",
-    "@babel/plugin-transform-optional-chaining": "^7.25.9",
-    "@babel/plugin-transform-private-methods": "^7.25.9",
     "@emotion/styled": "^11.13.0",
     "@fontsource/manrope": "^5.1.0",
     "@fontsource/roboto": "^5.0.15",
