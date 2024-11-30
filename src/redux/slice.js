@@ -19,19 +19,19 @@ const medSlice = createSlice({
     },
     extraReducers: (builder) =>
         builder
-            .addCase(signin.pending, (state, action) => {
+            .addCase(signin.pending, () => {
                 console.log("pending");
             })
             .addCase(signin.fulfilled, (state, action) => {
                 console.log("fulfilled");
                 state.token = action.payload.token;
             })
-            .addCase(signin.rejected, (state, action) => {
+            .addCase(signin.rejected, (_, action) => {
                 console.log(action);
                 console.log("rejected");
             })
 
-            .addCase(getData.pending, (state, action) => {
+            .addCase(getData.pending, () => {
                 console.log("pending");
             })
             .addCase(getData.fulfilled, (state, action) => {
@@ -46,7 +46,7 @@ const medSlice = createSlice({
                 console.log("rejected");
             })
 
-            .addCase(getDataById.pending, (state, action) => {
+            .addCase(getDataById.pending, () => {
                 console.log("pending");
             })
             .addCase(getDataById.fulfilled, (state, action) => {
@@ -61,7 +61,7 @@ const medSlice = createSlice({
                 console.log("rejected");
             })
 
-            .addCase(updateStudent.pending, (state, action) => {
+            .addCase(updateStudent.pending, () => {
                 console.log("pending");
             })
             .addCase(updateStudent.fulfilled, (state, action) => {
@@ -91,15 +91,15 @@ const medSlice = createSlice({
             //     state.showSelectVac = false;
             // }
         },
-        showSelectGroup: (state, action) => {
+        showSelectGroup: (state) => {
             state.showSelectGroup = true;
             state.showSelectVac = false;
         },
-        showSelectVac: (state, action) => {
+        showSelectVac: (state) => {
             state.showSelectVac = true;
             state.showSelectGroup = false;
         },
-        tornBurgerModal: (state, action) => {
+        tornBurgerModal: (state) => {
             state.showBurgerModal = !state.showBurgerModal;
         },
 
@@ -109,7 +109,7 @@ const medSlice = createSlice({
             state.reductStudent = "";
             state.showRedactModal = !state.showRedactModal;
         },
-        tornLoginModal: (state, action) => {
+        tornLoginModal: (state) => {
             state.showLoginModal = !state.showLoginModal;
         },
     },

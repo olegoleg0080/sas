@@ -18,6 +18,7 @@ export const signin = createAsyncThunk(
             });
             return res.data;
         } catch (error) {
+            console.log(error);
             return ThunkAPI.rejectWithValue("error");
         }
     }
@@ -44,6 +45,8 @@ export const updateStudent = createAsyncThunk(
             
             return res.data;
         } catch (error) {
+            console.log(error);
+            
             return ThunkAPI.rejectWithValue("error");
         }
     }
@@ -64,6 +67,7 @@ export const getData = createAsyncThunk(
             });
             return res.data;
         } catch (error) {
+            console.log(error);
             return ThunkAPI.rejectWithValue("error");
         }
     }
@@ -84,6 +88,7 @@ export const getDataById = createAsyncThunk(
             });
             return res.data;
         } catch (error) {
+            console.log(error);
             return ThunkAPI.rejectWithValue("error");
         }
     }

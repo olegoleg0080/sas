@@ -11,8 +11,6 @@ import { useDispatch } from "react-redux";
 import { tornBurgerModal } from "../../redux/slice";
 import { CloseIcon } from "../icons/svgIcons";
 
-
-
 export const BurgerModal = ({ isOpen, onClose }) => {
     const theme = useTheme();
     const dispatch = useDispatch();
