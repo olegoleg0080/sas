@@ -3,6 +3,7 @@ import axios from "axios";
 
 axios.defaults.baseURL = "https://sas-db.onrender.com/medApi/";
 
+axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
 export const signin = createAsyncThunk(
     "medApi/auth/signin",
     async (obj, ThunkAPI) => {
@@ -30,23 +31,19 @@ export const updateStudent = createAsyncThunk(
         console.log(obj);
         const { token, selectId, params } = obj;
         console.log(`Barer ${token}`);
-        
+
         try {
-            const res = await axios.post(
-                `/data/update/${selectId}`,
-                params, 
-                {
-                    headers: {
-                        authorization: `Bearer ${token}`,
-                    },
-                }
-            );
+            const res = await axios.post(`/data/update/${selectId}`, params, {
+                headers: {
+                    authorization: `Bearer ${token}`,
+                },
+            });
             console.log(res.data);
-            
+
             return res.data;
         } catch (error) {
             console.log(error);
-            
+
             return ThunkAPI.rejectWithValue("error");
         }
     }
@@ -59,13 +56,13 @@ export const getData = createAsyncThunk(
         try {
             console.log("try API GET");
             // console.log(token);
-            
+
             const res = await axios.get("/data/get", {
                 headers: {
                     authorization: `Bearer ${token}`,
                 },
             });
-            console.log(res.data)
+            console.log(res.data);
             return res.data;
         } catch (error) {
             console.log(error);
@@ -77,23 +74,28 @@ export const getData = createAsyncThunk(
 export const downloadExcel = createAsyncThunk(
     "medApi/data/downloadExcel",
     async (obj, ThunkAPI) => {
-        const { token, filterKey = "All", filterValue = "All", specificClass = "All" } = obj;
+        const {
+            token,
+            filterKey = "All",
+            filterValue = "All",
+            specificClass = "All",
+        } = obj;
         try {
             console.log("Starting Excel download...");
             const response = await axios.get(
                 `/data/generate-excel/${filterKey}/${filterValue}/${specificClass}`,
                 {
                     headers: {
-                        authorization: `Bearer ${token}`, 
+                        authorization: `Bearer ${token}`,
                     },
-                    responseType: "blob", 
+                    responseType: "blob",
                 }
             );
 
             const url = window.URL.createObjectURL(new Blob([response.data]));
             const link = document.createElement("a");
             link.href = url;
-            link.setAttribute("download", "filtered_data.xlsx"); 
+            link.setAttribute("download", "filtered_data.xlsx");
             document.body.appendChild(link);
             link.click();
             link.remove();
