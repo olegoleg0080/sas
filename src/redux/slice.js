@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import persistReducer from "redux-persist/es/persistReducer";
 import storage from "redux-persist/lib/storage";
-import { getData, getDataById, signin, updateStudent } from "../API";
+import { downloadExcel, getData, getDataById, signin, updateStudent } from "../API";
 
 const medSlice = createSlice({
     name: "med",
@@ -17,14 +17,16 @@ const medSlice = createSlice({
         showLoginModal: true,
         error: null,
     },
-    extraReducers: (builder) =>
+    extraReducers: builder =>
         builder
             .addCase(signin.pending, () => {
                 console.log("pending");
             })
             .addCase(signin.fulfilled, (state, action) => {
-                console.log("fulfilled");
-                state.token = action.payload.token;
+                console.log("fulfilled token");
+                if (state.token !== action.payload.token) {
+                    state.token = action.payload.token;
+                }
             })
             .addCase(signin.rejected, (_, action) => {
                 console.log(action);
@@ -35,9 +37,14 @@ const medSlice = createSlice({
                 console.log("pending");
             })
             .addCase(getData.fulfilled, (state, action) => {
-                console.log("fulfilled");
-                console.log(action.payload);
-                state.list = action.payload;
+                console.log("got");
+                // console.log(action.payload);
+                if (
+                    JSON.stringify(state.list) !==
+                    JSON.stringify(action.payload)
+                ) {
+                    state.list = action.payload;
+                }
             })
             .addCase(getData.rejected, (state, action) => {
                 console.log(action.payload);
@@ -67,12 +74,29 @@ const medSlice = createSlice({
             .addCase(updateStudent.fulfilled, (state, action) => {
                 console.log("fulfilled");
                 console.log(action.payload);
+                const index = state.list.findIndex(
+                    student => student._id === action.payload._id
+                );
+                if (index !== -1) {
+                    state.list[index] = action.payload;
+                }
                 state.showRedactModal = false;
             })
             .addCase(updateStudent.rejected, (state, action) => {
                 console.log(action.payload);
                 state.token = "";
                 state.showLoginModal = true;
+                console.log("rejected");
+            })
+            .addCase(downloadExcel.pending, () => {
+                console.log("pending");
+            })
+            .addCase(downloadExcel.fulfilled, (state, action) => {
+                console.log("fulfilled");
+                console.log(action.payload);
+            })
+            .addCase(downloadExcel.rejected, (state, action) => {
+                console.log(action.payload);
                 console.log("rejected");
             }),
     reducers: {
@@ -91,15 +115,15 @@ const medSlice = createSlice({
             //     state.showSelectVac = false;
             // }
         },
-        showSelectGroup: (state) => {
+        showSelectGroup: state => {
             state.showSelectGroup = true;
             state.showSelectVac = false;
         },
-        showSelectVac: (state) => {
+        showSelectVac: state => {
             state.showSelectVac = true;
             state.showSelectGroup = false;
         },
-        tornBurgerModal: (state) => {
+        tornBurgerModal: state => {
             state.showBurgerModal = !state.showBurgerModal;
         },
 
@@ -109,7 +133,7 @@ const medSlice = createSlice({
             state.reductStudent = "";
             state.showRedactModal = !state.showRedactModal;
         },
-        tornLoginModal: (state) => {
+        tornLoginModal: state => {
             state.showLoginModal = !state.showLoginModal;
         },
     },

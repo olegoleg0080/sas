@@ -18,7 +18,7 @@ export const RootModal = ()=>{
     return (
         <>
             <BurgerModal  isOpen={isShowBurgerModal} onClose={onCloseBurgerModal}/>
-            <LoginModal isOpen={isShowLoginModal} onClose={onCloseLoginModal}/>
+            <LoginModal  isOpen={isShowLoginModal} onClose={onCloseLoginModal}/>
             <RedactModal isOpen={isShowRedactModal} onClose={onCloseRedactModal}/>
         </>
        

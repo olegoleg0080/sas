@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { listSelector, tokenSelector } from "../../redux/selectors";
 import { Box, Button, Container, useTheme } from "@mui/material";
 import { useEffect } from "react";
-import { getData } from "../../API";
+import { downloadExcel, getData } from "../../API";
 import { RemoveIcon } from "../icons/svgIcons";
 import { CardClass } from "../CardClass";
 import { nanoid } from "nanoid";
@@ -12,6 +12,7 @@ export const SortByParams = () => {
     const { state } = useLocation();
     const [params, setParams] = useSearchParams();
     const filterGroup = params.get("filterGroup");
+    const filterVac = params.get("filterVac");
     const dispatch = useDispatch();
     const data = useSelector(listSelector);
     const token = useSelector(tokenSelector);
@@ -20,7 +21,7 @@ export const SortByParams = () => {
     useEffect(() => {
         dispatch(getData({ token }));
     }, [token, dispatch]);
-
+    
     useEffect(() => {
         if (state) {
             const filterGroup = state.filterGroup || "";
@@ -28,18 +29,17 @@ export const SortByParams = () => {
             setParams({ filterGroup, filterVac });
         }
     }, [state, setParams]);
+    const navigate = useNavigate();
 
     const groupedData = data.reduce((acc, student) => {
-        let parallelObj = acc.find((p) => p.parallel === student.parallel);
+        let parallelObj = acc.find(p => p.parallel === student.parallel);
 
         if (!parallelObj) {
             parallelObj = { parallel: student.parallel, classes: [] };
             acc.push(parallelObj);
         }
 
-        let classObj = parallelObj.classes.find(
-            (c) => c.class === student.class
-        );
+        let classObj = parallelObj.classes.find(c => c.class === student.class);
 
         if (!classObj) {
             classObj = { class: student.class, students: [] };
@@ -57,10 +57,35 @@ export const SortByParams = () => {
     }, []);
 
     groupedData.sort((a, b) => a.parallel - b.parallel);
-    groupedData.forEach((parallelObj) => {
-        parallelObj.classes.sort((a, b) => a.class.localeCompare(b.class, 'ru')); // 'ru' for Russian alphabet sorting
+    groupedData.forEach(parallelObj => {
+        parallelObj.classes.sort((a, b) =>
+            a.class.localeCompare(b.class, "ru")
+        ); // 'ru' for Russian alphabet sorting
     });
+    const groupMapping = {
+        group1: "Основна",
+        group2: "Підготовча",
+        group3: "Спеціальна",
+        group4: "Звільнений",
+    };
+    const vacMapping = {
+        yes: "Щеплений",
+        no: "Не щеплений",
+        vac1: "Щеплений",
+        vac2: "Не щеплений",
+    };
 
+    const handleDownload = (specificClass = "All") => {
+        const filterKey = filterGroup ? "group" : "vac"; 
+        const filterValue = filterGroup || filterVac || "All"; 
+
+        dispatch(downloadExcel({
+            token,
+            filterKey,
+            filterValue,
+            specificClass,
+        }));
+    };
 
     return (
         <Container
@@ -81,6 +106,9 @@ export const SortByParams = () => {
                 <Button
                     variant="contained"
                     endIcon={<RemoveIcon />}
+                    onClick={()=>{
+                        navigate("/")
+                    }}
                     sx={{
                         bgcolor: "transparent",
                         color: theme.palette.primary.main,
@@ -88,7 +116,7 @@ export const SortByParams = () => {
                         textTransform: "none",
                         padding: "8px 16px",
                         justifyContent: "start",
-                        width: "154px",
+                        width: "fit-content",
                         gap: "10px",
                         borderRadius: "32px",
                         fontFamily: "Manrope",
@@ -105,14 +133,16 @@ export const SortByParams = () => {
                         },
                     }}
                 >
-                    Підготовча
+                    {filterGroup
+                        ? groupMapping[filterGroup] || filterGroup
+                        : vacMapping[filterVac] || filterVac}
                 </Button>
-                {groupedData.map((item) => (
-                    
+                {groupedData.map(item => (
                     <CardClass
                         key={nanoid()}
                         obj={item}
                         type={filterGroup ? "group" : "vac"}
+                        download={handleDownload}
                     />
                 ))}
             </Box>

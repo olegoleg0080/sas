@@ -4,7 +4,6 @@ import { App } from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "./components/Theme/ThemeMui";
-
 import { PersistGate } from "redux-persist/integration/react";
 import { persistor, store } from "./redux/store";
 import "@fontsource/manrope";

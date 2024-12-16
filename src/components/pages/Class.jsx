@@ -27,11 +27,10 @@ export const Class = () => {
     
     const data = preData.filter(item => item.class === parallelClass && item.parallel === parseInt(parallel))
     useEffect(() => {
+        
         dispatch(getData({ token }));
         
     }, [token, dispatch]);
-    
-    
     const styleTh = {
         border: "none",
         display: "flex;",
@@ -51,6 +50,12 @@ export const Class = () => {
         },
     };
     let num = 0;
+    const groupMapping = {
+        group1: "Основна",
+        group2: "Підготовча",
+        group3: "Спеціальна",
+        group4: "Звільнений"
+      };
     return (
         <Container
             maxWidth="false"
@@ -139,7 +144,7 @@ export const Class = () => {
                     </TableHead>
                     <TableBody
                     onClick={(e) => {
-                        console.log(e.target.parentElement)
+                        // console.log(e.target.parentElement)
                                 dispatch(tornRedactModal(e.target.parentElement.id));
                             }}
                         sx={{
@@ -151,9 +156,9 @@ export const Class = () => {
                             },
                         }}
                     >
-                    {console.log("data:" ,data)}
+                    {/* {console.log("data:" ,data)} */}
                         {data.map((item) => {
-                            console.log("data:" ,data);
+                            {/* console.log("data:" ,data); */}
 
                             num+=1
                             return (
@@ -198,7 +203,7 @@ export const Class = () => {
                                     <TableCell
                                         sx={{ ...styleTh, fontWeight: "500" }}
                                     >
-                                        {item.group}
+                                        {groupMapping[item.group]}
                                     </TableCell>
                                     <TableCell
                                         sx={{ ...styleTh, fontWeight: "500" }}
@@ -208,7 +213,7 @@ export const Class = () => {
                                     <TableCell
                                         sx={{ ...styleTh, fontWeight: "500" }}
                                     >
-                                        {item.vac}
+                                        {item.vac === "yes" ? "Щеплений" : "Не щеплений"}
                                     </TableCell>
                                 </TableRow>
                             );

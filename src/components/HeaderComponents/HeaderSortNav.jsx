@@ -19,7 +19,7 @@ export const HeaderSortNav = () => {
     const theme = useTheme();
     const isShowGroups = useSelector(showSelectGroupSelector);
     const isShowVac = useSelector(showSelectVacSelector);
-    console.log(isShowGroups);
+    // console.log(isShowGroups);
 
     const dispatch = useDispatch();
 

@@ -17,7 +17,7 @@ import { useSearchParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { tornRedactModal } from "../redux/slice";
 
-export const CardClass = ({ obj, type }) => {
+export const CardClass = ({ obj, type, download }) => {
     const [params] = useSearchParams();
     const dispatch = useDispatch();
     const filterGroup = params.get("filterGroup");
@@ -44,9 +44,14 @@ export const CardClass = ({ obj, type }) => {
             fontSize: "24px",
         },
     };
-
-    const visibleData = (data) => {
-        const newData = data.filter((item) => {
+    const groupMapping = {
+        group1: "Основна",
+        group2: "Підготовча",
+        group3: "Спеціальна",
+        group4: "Звільнений",
+    };
+    const visibleData = data => {
+        const newData = data.filter(item => {
             return item.group === filterGroup || item.vac === filterVac;
         });
 
@@ -75,7 +80,7 @@ export const CardClass = ({ obj, type }) => {
                 },
             }}
         >
-            {obj.classes.map((item) => {
+            {obj.classes.map(item => {
                 return (
                     <Box
                         key={nanoid()}
@@ -150,6 +155,7 @@ export const CardClass = ({ obj, type }) => {
                                 }}
                                 variant="contained"
                                 endIcon={<DownloadIcon />}
+                                onClick={()=>{download(`${obj.parallel}-${item.class}`)}}
                             >
                                 Отримати дані
                             </Button>
@@ -222,8 +228,8 @@ export const CardClass = ({ obj, type }) => {
                                 </TableRow>
                             </TableHead>
                             <TableBody
-                                onClick={(e) => {
-                                    console.log(e.target.parentElement, "1");
+                                onClick={e => {
+                                    // console.log(e.target.parentElement, "1");
                                     dispatch(
                                         tornRedactModal(
                                             e.target.parentElement.id
@@ -232,103 +238,101 @@ export const CardClass = ({ obj, type }) => {
                                 }}
                             >
                                 {visibleData(item.students).length > 0 &&
-                                    visibleData(item.students).map(
-                                        (student) => {
-                                            return (
-                                                <TableRow
-                                                    key={nanoid()}
-                                                    id={student._id}
-                                                    sx={{
-                                                        display: "grid",
-                                                        gridTemplateColumns:
-                                                            type === "group"
-                                                                ? "30px 140px 110px 110px"
-                                                                : "30px 135px 115px",
-                                                        gap: "0;",
-                                                        "&:hover": {
-                                                            bgcolor:
-                                                                theme.palette
-                                                                    .primary
-                                                                    .purpure,
-                                                            cursor: "pointer",
+                                    visibleData(item.students).map(student => {
+                                        return (
+                                            <TableRow
+                                                key={nanoid()}
+                                                id={student._id}
+                                                sx={{
+                                                    display: "grid",
+                                                    gridTemplateColumns:
+                                                        type === "group"
+                                                            ? "30px 140px 110px 110px"
+                                                            : "30px 135px 115px",
+                                                    gap: "0;",
+                                                    "&:hover": {
+                                                        bgcolor:
+                                                            theme.palette
+                                                                .primary
+                                                                .purpure,
+                                                        cursor: "pointer",
+                                                    },
+                                                    "@media (min-width: 744px)":
+                                                        {
+                                                            gridTemplateColumns:
+                                                                type === "group"
+                                                                    ? "48px 180px 170px 150px"
+                                                                    : "48px 200px 160px",
                                                         },
-                                                        "@media (min-width: 744px)":
-                                                            {
-                                                                gridTemplateColumns:
-                                                                    type ===
-                                                                    "group"
-                                                                        ? "48px 180px 170px 150px"
-                                                                        : "48px 200px 160px",
-                                                            },
-                                                        "@media (min-width: 1440px)":
-                                                            {
-                                                                gap: "24px",
-                                                                gridTemplateColumns:
-                                                                    type ===
-                                                                    "group"
-                                                                        ? "48px 200px 200px 150px"
-                                                                        : "48px 200px 200px",
-                                                            },
+                                                    "@media (min-width: 1440px)":
+                                                        {
+                                                            gap: "24px",
+                                                            gridTemplateColumns:
+                                                                type === "group"
+                                                                    ? "48px 200px 200px 150px"
+                                                                    : "48px 200px 200px",
+                                                        },
+                                                }}
+                                            >
+                                                <TableCell
+                                                    sx={{
+                                                        ...styleTh,
+                                                        fontWeight: "500",
                                                     }}
                                                 >
+                                                    1
+                                                </TableCell>
+                                                <TableCell
+                                                    sx={{
+                                                        ...styleTh,
+                                                        fontWeight: "500",
+                                                    }}
+                                                >
+                                                    {student.name}
+                                                </TableCell>
+                                                {type === "group" && (
                                                     <TableCell
                                                         sx={{
                                                             ...styleTh,
                                                             fontWeight: "500",
                                                         }}
                                                     >
-                                                        1
+                                                        {student.group &&
+                                                        groupMapping[
+                                                            student.group
+                                                        ]
+                                                            ? groupMapping[
+                                                                student.group
+                                                            ]
+                                                            : ""}
                                                     </TableCell>
-                                                    <TableCell
-                                                        sx={{
-                                                            ...styleTh,
-                                                            fontWeight: "500",
-                                                        }}
-                                                    >
-                                                        {student.name}
-                                                    </TableCell>
-                                                    {type === "group" && (
-                                                        <TableCell
-                                                            sx={{
-                                                                ...styleTh,
-                                                                fontWeight:
-                                                                    "500",
-                                                            }}
-                                                        >
-                                                            {student.group
-                                                                ? student.group
-                                                                : ""}
-                                                        </TableCell>
-                                                    )}
+                                                )}
 
-                                                    {type === "group" && (
-                                                        <TableCell
-                                                            sx={{
-                                                                ...styleTh,
-                                                                fontWeight:
-                                                                    "500",
-                                                            }}
-                                                        >
-                                                            term
-                                                        </TableCell>
-                                                    )}
-                                                    {type === "vac" && (
-                                                        <TableCell
-                                                            sx={{
-                                                                ...styleTh,
-                                                                fontWeight:
-                                                                    "500",
-                                                            }}
-                                                        >
-                                                            {student.vac
-                                                                ? student.vac
-                                                                : ""}
-                                                        </TableCell>
-                                                    )}
-                                                </TableRow>
-                                            );
-                                        }
-                                    )}
+                                                {type === "group" && (
+                                                    <TableCell
+                                                        sx={{
+                                                            ...styleTh,
+                                                            fontWeight: "500",
+                                                        }}
+                                                    >
+                                                        term
+                                                    </TableCell>
+                                                )}
+                                                {type === "vac" && (
+                                                    <TableCell
+                                                        sx={{
+                                                            ...styleTh,
+                                                            fontWeight: "500",
+                                                        }}
+                                                    >
+                                                        {student.vac === "yes"
+                                                            ? "Щеплений"
+                                                            : "Не щеплений"}
+                                                    </TableCell>
+                                                )}
+                                            </TableRow>
+                                        );
+                                    })}
                             </TableBody>
                         </Table>
                     </Box>

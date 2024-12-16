@@ -55,6 +55,7 @@ export const RedactModal = ({ isOpen, onClose }) => {
     }, [dispatch, reductStudent]);
     const send = ()=>{
         dispatch(updateStudent({ token, selectId, params: {name, birthday, group, term, vac}}))
+        
         // dispatch(getData({ token }));
     }
     const styleSelect = {

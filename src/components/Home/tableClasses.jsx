@@ -18,6 +18,7 @@ export const TableClasses = ({ maxParallel = 50, minParallel = 1 }) => {
     const list = useSelector(listSelector);
 
     useEffect(() => {
+        // console.log("Calling getData with token:", token);
         dispatch(getData({ token }));
     }, [token, dispatch]);
 
