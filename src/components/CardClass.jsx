@@ -315,7 +315,7 @@ export const CardClass = ({ obj, type, download }) => {
                                                             fontWeight: "500",
                                                         }}
                                                     >
-                                                        term
+                                                        {student.term || ""}
                                                     </TableCell>
                                                 )}
                                                 {type === "vac" && (
