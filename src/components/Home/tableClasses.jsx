@@ -99,7 +99,6 @@ export const TableClasses = ({ maxParallel = 50, minParallel = 1 }) => {
                                             sx={{
                                                 display: "flex;",
                                                 width: "60px;",
-                                                whiteSpace: "nowrap",
                                                 p: 0,
                                                 justifyContent: "center;",
                                                 alignItems: "center;",

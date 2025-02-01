@@ -198,7 +198,6 @@ export const Class = () => {
                                     <TableCell
                                         sx={{ ...styleTh, fontWeight: "500" }}
                                     >
-                                    "2022-04-17"
                                         {item.date}
                                     </TableCell>
                                     <TableCell

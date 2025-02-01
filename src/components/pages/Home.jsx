@@ -18,7 +18,6 @@ export const Home = () => {
             p: "40px 48px",
         },
     };
-    
     const styleText = {
         color: theme.palette.primary.darkm,
         fontFamily: "Manrope;",
