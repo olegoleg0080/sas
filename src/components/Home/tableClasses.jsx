@@ -26,23 +26,25 @@ export const TableClasses = ({ maxParallel = 50, minParallel = 1 }) => {
 
     // Фильтрация данных по параллелям
     const filteredData = data.filter(
-        (item) => item.parallel >= minParallel && item.parallel <= maxParallel
+        item => item.parallel >= minParallel && item.parallel <= maxParallel
     );
 
     // Сортировка данных по параллели и алфавиту классов
     const sortedData = filteredData.sort((a, b) => {
         if (a.parallel === b.parallel) {
             // Сортировка по классу, если параллели одинаковые (например, "А" раньше "Б")
-            return a.class.localeCompare(b.class, "ru", { sensitivity: "base" });
+            return a.class.localeCompare(b.class, "ru", {
+                sensitivity: "base",
+            });
         }
         // Сортировка по параллели
         return a.parallel - b.parallel;
     });
 
     // Группировка по параллели
-    const rows = [...new Set(sortedData.map((item) => item.parallel))].map(
-        (parallel) => {
-            return sortedData.filter((item) => item.parallel === parallel);
+    const rows = [...new Set(sortedData.map(item => item.parallel))].map(
+        parallel => {
+            return sortedData.filter(item => item.parallel === parallel);
         }
     );
 
@@ -82,12 +84,15 @@ export const TableClasses = ({ maxParallel = 50, minParallel = 1 }) => {
                                     },
                                 }}
                             >
-                                {row.map((item) => (
+                                {row.map(item => (
                                     <TableCell
                                         key={item.class}
                                         sx={{
                                             p: 0,
                                             border: 0,
+                                            "@media (max-width: 525px)": {
+                                                padding: "200px",
+                                            },
                                         }}
                                     >
                                         <Button

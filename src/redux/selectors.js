@@ -7,4 +7,5 @@ export const tokenSelector = (state)=>state.med.token
 export const selectIdSelector = (state)=>state.med.selectId
 export const reductStudentSelector = (state)=>state.med.reductStudent
 export const showLoginModalSelector = (state)=> state.med.showLoginModal;
+export const isLoadingSelector = (state)=> state.med.isLoading;
 
