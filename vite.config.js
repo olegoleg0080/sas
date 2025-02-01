@@ -3,12 +3,12 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: "/sas/", // Указываем базовый путь
   resolve: { extensions: [".jsx", ".json", ".css", ".js"] },
   plugins: [react()],
-  base: "./", // Относительные пути
   build: {
-    outDir: "dist/sas", // Оставляем билд в sas
-    assetsDir: "assets" // Файлы будут в "sas/assets"
-  }
+    outDir: "dist/sas",
+    assetsDir: "assets",
+  },
 });
 
