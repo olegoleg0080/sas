@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   resolve: { extensions: [".jsx", ".json", ".css", ".js"] },
   plugins: [react()],
-  base: "/sas/",
+  base: "/sas",
   build: {
     outDir: "dist/sas" // Кладем билд в папку sas
   }
