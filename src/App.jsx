@@ -4,12 +4,14 @@ import { Home } from "./components/pages/Home";
 import { GlobalStyle } from "./GlobalStyle";
 import { Class } from "./components/pages/Class";
 import { SortByParams } from "./components/pages/SortByParams";
+import { Typography } from "@mui/material";
 // import { Class } from "./components/pages/Class";
 // import { SortByParams } from "./components/pages/SortByParams";
 
 export const App = () => {
     return (
         <>
+        <Typography>Hello World</Typography>
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<Home />} />
