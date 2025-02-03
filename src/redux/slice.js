@@ -15,21 +15,17 @@ const medSlice = createSlice({
         showSelectVac: false,
         showRedactModal: false,
         showLoginModal: true,
-        isLoading: false,
         error: null,
     },
     extraReducers: builder =>
         builder
-            .addCase(signin.pending, (state) => {
+            .addCase(signin.pending, () => {
                 console.log("pending");
-                state.isLoading = true
             })
             .addCase(signin.fulfilled, (state, action) => {
                 console.log("fulfilled token");
-                state.isLoading = false
                 if (state.token !== action.payload.token) {
                     state.token = action.payload.token;
-                    
                 }
             })
             .addCase(signin.rejected, (_, action) => {
@@ -37,9 +33,8 @@ const medSlice = createSlice({
                 console.log("rejected");
             })
 
-            .addCase(getData.pending, (state) => {
+            .addCase(getData.pending, () => {
                 console.log("pending");
-                state.isLoading = true
             })
             .addCase(getData.fulfilled, (state, action) => {
                 console.log("got");
@@ -50,7 +45,6 @@ const medSlice = createSlice({
                 ) {
                     state.list = action.payload;
                 }
-                state.isLoading = false
             })
             .addCase(getData.rejected, (state, action) => {
                 console.log(action.payload);
@@ -66,7 +60,6 @@ const medSlice = createSlice({
                 console.log("fulfilled");
                 console.log(action.payload);
                 state.reductStudent = action.payload;
-                state.isLoading = false
             })
             .addCase(getDataById.rejected, (state, action) => {
                 console.log(action.payload);
@@ -75,9 +68,8 @@ const medSlice = createSlice({
                 console.log("rejected");
             })
 
-            .addCase(updateStudent.pending, (state) => {
+            .addCase(updateStudent.pending, () => {
                 console.log("pending");
-                state.isLoading = true
             })
             .addCase(updateStudent.fulfilled, (state, action) => {
                 console.log("fulfilled");
@@ -89,7 +81,6 @@ const medSlice = createSlice({
                     state.list[index] = action.payload;
                 }
                 state.showRedactModal = false;
-                state.isLoading = false
             })
             .addCase(updateStudent.rejected, (state, action) => {
                 console.log(action.payload);
@@ -103,7 +94,6 @@ const medSlice = createSlice({
             .addCase(downloadExcel.fulfilled, (state, action) => {
                 console.log("fulfilled");
                 console.log(action.payload);
-                state.isLoading = false
             })
             .addCase(downloadExcel.rejected, (state, action) => {
                 console.log(action.payload);
@@ -156,14 +146,13 @@ export const {
     tornRedactModal,
     login,
     tornLoginModal,
-    isLoading,
 } = medSlice.actions;
 export const medReducer = medSlice.reducer;
 
 const toDoPersistConfig = {
     key: "root",
     storage: storage,
-    blacklist: ["list", "showRedactModal", "selectId", "isLoading"],
+    blacklist: ["list", "showRedactModal", "selectId"],
 };
 
 export const medPersistReducer = persistReducer(toDoPersistConfig, medReducer);

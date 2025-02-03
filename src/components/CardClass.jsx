@@ -64,7 +64,7 @@ export const CardClass = ({ obj, type, download }) => {
             sx={{
                 display: "flex",
                 gap: "40px",
-                
+                overflow: "scroll",
                 "@media (min-width: 600px)": {
                     padding: 0,
                 },
