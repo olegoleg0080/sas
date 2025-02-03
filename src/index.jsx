@@ -13,13 +13,13 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <React.StrictMode>
         <ThemeProvider theme={theme}>
-            {/* <BrowserRouter basename="/sas/"> */}
+            <BrowserRouter basename="/">
                 <Provider store={store}>
                     <PersistGate loading={null} persistor={persistor}>
                         <App />
                     </PersistGate>
                 </Provider>
-            {/* </BrowserRouter> */}
+            </BrowserRouter>
         </ThemeProvider>
     </React.StrictMode>
 );

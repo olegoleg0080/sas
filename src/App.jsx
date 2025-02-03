@@ -12,14 +12,14 @@ export const App = () => {
     return (
         <>
         <Typography>Hello World</Typography>
-            {/* <Routes>
+            <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<Home />} />
                     <Route path="/class/:className" element={<Class />} />
                     <Route path="/sort/:par" element={<SortByParams />} />
                     <Route path="*" element={<div>404!!!</div>} />
                 </Route>
-            </Routes> */}
+            </Routes>
             <GlobalStyle />
         </>
     );
