@@ -7,10 +7,10 @@ axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
 export const signin = createAsyncThunk(
     "medApi/auth/signin",
     async (obj, ThunkAPI) => {
-        console.log(obj);
+        // console.log(obj);
         const { email, password } = obj;
         try {
-            console.log("try");
+            // console.log("try");
             const res = await axios.post("/auth/signin", {
                 params: {
                     email,
@@ -19,7 +19,7 @@ export const signin = createAsyncThunk(
             });
             return res.data;
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return ThunkAPI.rejectWithValue("error");
         }
     }
@@ -28,9 +28,9 @@ export const signin = createAsyncThunk(
 export const updateStudent = createAsyncThunk(
     "medApi/data/update",
     async (obj, ThunkAPI) => {
-        console.log(obj);
+        // console.log(obj);
         const { token, selectId, params } = obj;
-        console.log(`Barer ${token}`);
+        // console.log(`Barer ${token}`);
 
         try {
             const res = await axios.post(`/data/update/${selectId}`, params, {
@@ -38,11 +38,11 @@ export const updateStudent = createAsyncThunk(
                     authorization: `Bearer ${token}`,
                 },
             });
-            console.log(res.data);
+            // console.log(res.data);
 
             return res.data;
         } catch (error) {
-            console.log(error);
+            // console.log(error);
 
             return ThunkAPI.rejectWithValue("error");
         }
@@ -54,7 +54,7 @@ export const getData = createAsyncThunk(
     async (obj, ThunkAPI) => {
         const { token } = obj;
         try {
-            console.log("try API GET");
+            // console.log("try API GET");
             // console.log(token);
 
             const res = await axios.get("/data/get", {
@@ -62,10 +62,10 @@ export const getData = createAsyncThunk(
                     authorization: `Bearer ${token}`,
                 },
             });
-            console.log(res.data);
+            // console.log(res.data);
             return res.data;
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return ThunkAPI.rejectWithValue("error");
         }
     }
@@ -81,7 +81,7 @@ export const downloadExcel = createAsyncThunk(
             specificClass = "All",
         } = obj;
         try {
-            console.log("Starting Excel download...");
+            // console.log("Starting Excel download...");
             const response = await axios.get(
                 `/data/generate-excel/${filterKey}/${filterValue}/${specificClass}`,
                 {
@@ -114,8 +114,8 @@ export const getDataById = createAsyncThunk(
     async (obj, ThunkAPI) => {
         const { token, selectId } = obj;
         try {
-            console.log("try");
-            console.log(token, selectId);
+            // console.log("try");
+            // console.log(token, selectId);
 
             const res = await axios.get(`/data/getById/${selectId}`, {
                 headers: {
@@ -124,7 +124,7 @@ export const getDataById = createAsyncThunk(
             });
             return res.data;
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return ThunkAPI.rejectWithValue("error");
         }
     }

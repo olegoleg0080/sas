@@ -11,7 +11,7 @@ import { Typography } from "@mui/material";
 export const App = () => {
     return (
         <>
-        <Typography>Hello World</Typography>
+        {/* <Typography>Hello World</Typography> */}
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<Home />} />

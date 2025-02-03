@@ -20,25 +20,25 @@ const medSlice = createSlice({
     extraReducers: builder =>
         builder
             .addCase(signin.pending, () => {
-                console.log("pending");
+                // console.log("pending");
             })
             .addCase(signin.fulfilled, (state, action) => {
-                console.log("fulfilled token");
+                // console.log("fulfilled token");
                 if (state.token !== action.payload.token) {
                     state.token = action.payload.token;
                 }
             })
             .addCase(signin.rejected, (_, action) => {
-                console.log(action);
-                console.log("rejected");
+                // console.log(action);
+                // console.log("rejected");
             })
 
             .addCase(getData.pending, () => {
-                console.log("pending");
+                // console.log("pending");
             })
             .addCase(getData.fulfilled, (state, action) => {
-                console.log("got");
-                // console.log(action.payload);
+                // console.log("got");
+                console.log(action.payload);
                 if (
                     JSON.stringify(state.list) !==
                     JSON.stringify(action.payload)
@@ -47,33 +47,33 @@ const medSlice = createSlice({
                 }
             })
             .addCase(getData.rejected, (state, action) => {
-                console.log(action.payload);
+                // console.log(action.payload);
                 state.token = "";
                 state.showLoginModal = true;
-                console.log("rejected");
+                // console.log("rejected");
             })
 
             .addCase(getDataById.pending, () => {
-                console.log("pending");
+                // console.log("pending");
             })
             .addCase(getDataById.fulfilled, (state, action) => {
-                console.log("fulfilled");
-                console.log(action.payload);
+                // console.log("fulfilled");
+                // console.log(action.payload);
                 state.reductStudent = action.payload;
             })
             .addCase(getDataById.rejected, (state, action) => {
-                console.log(action.payload);
+                // console.log(action.payload);
                 state.token = "";
                 state.showLoginModal = true;
-                console.log("rejected");
+                // console.log("rejected");
             })
 
             .addCase(updateStudent.pending, () => {
-                console.log("pending");
+                // console.log("pending");
             })
             .addCase(updateStudent.fulfilled, (state, action) => {
-                console.log("fulfilled");
-                console.log(action.payload);
+                // console.log("fulfilled");
+                // console.log(action.payload);
                 const index = state.list.findIndex(
                     student => student._id === action.payload._id
                 );
@@ -83,21 +83,21 @@ const medSlice = createSlice({
                 state.showRedactModal = false;
             })
             .addCase(updateStudent.rejected, (state, action) => {
-                console.log(action.payload);
+                // console.log(action.payload);
                 state.token = "";
                 state.showLoginModal = true;
-                console.log("rejected");
+                // console.log("rejected");
             })
             .addCase(downloadExcel.pending, () => {
-                console.log("pending");
+                // console.log("pending");
             })
             .addCase(downloadExcel.fulfilled, (state, action) => {
-                console.log("fulfilled");
-                console.log(action.payload);
+                // console.log("fulfilled");
+                // console.log(action.payload);
             })
             .addCase(downloadExcel.rejected, (state, action) => {
-                console.log(action.payload);
-                console.log("rejected");
+                // console.log(action.payload);
+                // console.log("rejected");
             }),
     reducers: {
         showAllSelect: (state, action) => {
@@ -128,7 +128,7 @@ const medSlice = createSlice({
         },
 
         tornRedactModal: (state, action) => {
-            console.log(action.payload);
+            // console.log(action.payload);
             state.selectId = action.payload;
             state.reductStudent = "";
             state.showRedactModal = !state.showRedactModal;

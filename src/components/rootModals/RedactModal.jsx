@@ -54,7 +54,7 @@ export const RedactModal = ({ isOpen, onClose }) => {
         }
     }, [dispatch, reductStudent]);
     const send = ()=>{
-        console.log(term);
+        // console.log(term);
         
         dispatch(updateStudent({ token, selectId, params: {name, birthday, group, term, vac}}))
         
