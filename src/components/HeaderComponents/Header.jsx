@@ -48,7 +48,7 @@ export const Header = () => {
                 <BurgerIcon />
             </IconButton>
             <Link
-                href="/sas/"
+                href="/"
                 underline="none"
                 color="#fff"
                 sx={{ ...eSchoolLogo }}
