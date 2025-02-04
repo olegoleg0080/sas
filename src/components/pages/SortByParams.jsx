@@ -50,6 +50,7 @@ export const SortByParams = () => {
             _id: student._id,
             name: student.name,
             group: student.group,
+            term: student.term,
             vac: student.vac,
         });
 

@@ -34,7 +34,7 @@ export const RedactModal = ({ isOpen, onClose }) => {
     const dispatch = useDispatch();
     // ********************************************************
     const [name, setName] = useState("");
-    const [birthday, setBirthday] = useState("2022-04-17");
+    const [date, setDate] = useState("2022-04-17");
     const [group, setGroup] = useState("group1");
     const [term, setTerm] = useState("2022-04-17");
     const [vac, setVac] = useState("yes");
@@ -47,7 +47,7 @@ export const RedactModal = ({ isOpen, onClose }) => {
     useEffect(() => {
         if (reductStudent) {
             setName(reductStudent.name || "");
-            setBirthday(reductStudent.birthday || "2022-04-17");
+            setDate(reductStudent.date || "2022-04-17");
             setGroup(reductStudent.group || "group1");
             setTerm(reductStudent.term || "2022-04-17");
             // setVac(reductStudent.vac || "yes");
@@ -56,7 +56,7 @@ export const RedactModal = ({ isOpen, onClose }) => {
     const send = ()=>{
         // console.log(term);
         
-        dispatch(updateStudent({ token, selectId, params: {name, birthday, group, term, vac}}))
+        dispatch(updateStudent({ token, selectId, params: {name, date, group, term, vac}}))
         
         // dispatch(getData({ token }));
     }
@@ -234,7 +234,7 @@ export const RedactModal = ({ isOpen, onClose }) => {
                             onChange={(e) => setName(e.target.value)}
                         ></TextField>
                     </Box>
-                    {/* //******************************||BIRTHDAY||************************************* */}
+                    {/* //******************************||DATE||************************************* */}
                     <Box sx={styleBox}>
                         <Typography>Дата народження</Typography>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -243,9 +243,9 @@ export const RedactModal = ({ isOpen, onClose }) => {
                                 slots={{
                                     openPickerIcon: CalendarIcon,
                                 }}
-                                defaultValue={dayjs(birthday)}
+                                defaultValue={dayjs(date)}
                                 onChange={(newValue) =>
-                                    setBirthday(
+                                    setDate(
                                         newValue
                                             ? newValue.format("YYYY-MM-DD")
                                             : ""

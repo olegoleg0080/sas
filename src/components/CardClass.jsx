@@ -239,6 +239,7 @@ export const CardClass = ({ obj, type, download }) => {
                             >
                                 {visibleData(item.students).length > 0 &&
                                     visibleData(item.students).map(student => {
+                                        console.log(student)
                                         return (
                                             <TableRow
                                                 key={nanoid()}
