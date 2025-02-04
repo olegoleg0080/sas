@@ -99,7 +99,14 @@ export const Class = () => {
                     "&::-webkit-scrollbar": {
                         display: "none",
                     },
+                    paddingLeft: "300px",
                     boxShadow: "none",
+                    "@media (min-width: 744px)": {
+                            paddingLeft: "220px",
+                        },
+                        "@media (min-width: 950px)": {
+                            paddingLeft: "0px",
+                        },
                 }}
             >
                 <Table

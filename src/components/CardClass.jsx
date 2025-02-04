@@ -97,7 +97,7 @@ export const CardClass = ({ obj, type, download }) => {
                         <Box
                             sx={{
                                 display: "flex;",
-                                width: type === "group" ? "455px;" : "342px",
+                                width: type === "group" ? "422px;" : "342px",
                                 padding: "10px 30px;",
                                 justifyContent: "space-between;",
                                 alignItems: "center;",
@@ -105,11 +105,11 @@ export const CardClass = ({ obj, type, download }) => {
                                 bgcolor: theme.palette.primary.lightMain,
                                 "@media (min-width: 744px)": {
                                     width:
-                                        type === "group" ? "641px;" : "501px",
+                                        type === "group" ? "608px;" : "501px",
                                 },
                                 "@media (min-width: 1440px)": {
                                     width:
-                                        type === "group" ? "786px;" : "612px",
+                                        type === "group" ? "730px;" : "612px",
                                 },
                             }}
                         >
