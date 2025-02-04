@@ -96,6 +96,9 @@ export const TableClasses = ({ maxParallel = 50, minParallel = 1 }) => {
                                                 fontWeight: "700",
                                                 lineHeight: "1.4",
                                                 letterSpacing: "0.18px",
+                                                "& *":{
+                                                    whiteSpace: nowrap
+                                                },
                                                 "&>a": {
                                                     padding: "10px 20px",
                                                     textDecoration: "none",
@@ -127,6 +130,7 @@ export const TableClasses = ({ maxParallel = 50, minParallel = 1 }) => {
                                                         letterSpacing: "0.4px",
                                                     },
                                                 },
+                                                
                                             }}
                                             type="button"
                                         >
