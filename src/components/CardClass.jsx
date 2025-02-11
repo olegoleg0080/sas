@@ -50,7 +50,7 @@ export const CardClass = ({ obj, type, download }) => {
         group3: "Спеціальна",
         group4: "Звільнений",
     };
-    let num = 0;
+
     const visibleData = data => {
         const newData = data.filter(item => {
             return item.group === filterGroup || item.vac === filterVac;
@@ -82,6 +82,7 @@ export const CardClass = ({ obj, type, download }) => {
             }}
         >
             {obj.classes.map(item => {
+                let num = 0;
                 return (
                     <Box
                         key={nanoid()}
