@@ -18,7 +18,7 @@ export const TableClasses = ({ maxParallel = 50, minParallel = 1 }) => {
     const list = useSelector(listSelector);
     const schoolId = useSelector(schoolIdSelector);
     useEffect(() => {
-        if (!schoolId || !token || !dispatch) return; 
+        // if (!schoolId || !token || !dispatch) return; 
     
         console.log(schoolId);
         dispatch(getData({ token, schoolId }));

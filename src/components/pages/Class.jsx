@@ -28,7 +28,7 @@ export const Class = () => {
     
     const data = preData.filter(item => item.class === parallelClass && item.parallel === parseInt(parallel))
     useEffect(() => {
-    if (!schoolId || !token || !dispatch) return; // Ждём, пока все данные будут доступны
+    // if (!schoolId || !token || !dispatch) return; // Ждём, пока все данные будут доступны
 
     console.log(schoolId);
     dispatch(getData({ token, schoolId }));

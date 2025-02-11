@@ -1,4 +1,4 @@
-import { Box, Button, Link, useTheme } from "@mui/material";
+import { Box, Button, Typography, useTheme } from "@mui/material";
 import { SortIcon } from "../icons/svgIcons";
 import { HeaderSelectList } from "./HeaderSelectList";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,13 +14,14 @@ import {
     headerSortNavBtn,
 } from "../../styles/headerStyles";
 import { showSelectGroup, showSelectVac } from "../../redux/slice";
+import { Link, useNavigate } from "react-router-dom";
 
 export const HeaderSortNav = () => {
     const theme = useTheme();
     const isShowGroups = useSelector(showSelectGroupSelector);
     const isShowVac = useSelector(showSelectVacSelector);
     // console.log(isShowGroups);
-
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     return (
@@ -29,19 +30,22 @@ export const HeaderSortNav = () => {
                 ...headerSortNavBox,
             }}
         >
-
-            <Link
-                href="/"
-                underline="none"
-                color="#fff"
-                sx={{ ...headerSortNavBtn,
-                    "&:hover": {
-                        color: theme.palette.primary.main,
-                        bgcolor: "#fff",
-                    }, }}
-            >
-                Класи
-            </Link>
+            <Button
+                    className="navBtn"
+                    name="navBtn"
+                    onClick={() => {
+                        navigate('/');
+                    }}
+                    sx={{
+                        ...headerNavSelectBtn,
+                        "&:hover": {
+                            color: theme.palette.primary.main,
+                            bgcolor: "#fff",
+                        },
+                    }}
+                >
+                    Класи
+                </Button>
             <Box
                 sx={{
                     ...headerNavSelectGroup,
@@ -51,7 +55,7 @@ export const HeaderSortNav = () => {
                     className="navBtn"
                     name="navBtn"
                     onClick={() => {
-                        dispatch(showSelectGroup())
+                        dispatch(showSelectGroup());
                     }}
                     sx={{
                         ...headerNavSelectBtn,
@@ -70,12 +74,12 @@ export const HeaderSortNav = () => {
                 </Button>
                 {isShowGroups && (
                     <HeaderSelectList
-                        params={
-                            {group1: "Основна",
+                        params={{
+                            group1: "Основна",
                             group2: "Підготовча",
                             group3: "Спеціальна",
-                        group4: "Звільнені",}
-                        }
+                            group4: "Звільнені",
+                        }}
                     />
                 )}
             </Box>
@@ -88,7 +92,7 @@ export const HeaderSortNav = () => {
                     className="navBtn"
                     name="navBtn"
                     onClick={() => {
-                        dispatch(showSelectVac())
+                        dispatch(showSelectVac());
                     }}
                     sx={{
                         ...headerSortNavBtn,
@@ -106,7 +110,9 @@ export const HeaderSortNav = () => {
                     Щеплення
                 </Button>
                 {isShowVac && (
-                    <HeaderSelectList params={{yes: "Щеплені", no: "Не щеплені"}} />
+                    <HeaderSelectList
+                        params={{ yes: "Щеплені", no: "Не щеплені" }}
+                    />
                 )}
             </Box>
         </Box>
