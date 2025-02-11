@@ -1,9 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// axios.defaults.baseURL = "https://sas-db.onrender.com/medApi/";
+axios.defaults.baseURL = "https://sas-db.onrender.com/medApi/";
 
-axios.defaults.baseURL = "http://localhost:3001/medApi/";
+// axios.defaults.baseURL = "http://localhost:3001/medApi/";
 
 axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
 export const signin = createAsyncThunk(
