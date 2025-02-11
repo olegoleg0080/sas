@@ -21,7 +21,7 @@ export const SortByParams = () => {
     useEffect(() => {
         // if (!schoolId || !token || !dispatch) return; 
     
-        console.log(schoolId);
+        // console.log(schoolId);
         dispatch(getData({ token, schoolId }));
     }, [schoolId, token, dispatch]);
     

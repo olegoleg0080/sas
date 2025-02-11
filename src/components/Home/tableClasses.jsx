@@ -20,7 +20,7 @@ export const TableClasses = ({ maxParallel = 50, minParallel = 1 }) => {
     useEffect(() => {
         // if (!schoolId || !token || !dispatch) return; 
     
-        console.log(schoolId);
+        // console.log(schoolId);
         dispatch(getData({ token, schoolId }));
     }, [schoolId, token, dispatch]);
     

@@ -30,7 +30,7 @@ export const Class = () => {
     useEffect(() => {
     // if (!schoolId || !token || !dispatch) return; // Ждём, пока все данные будут доступны
 
-    console.log(schoolId);
+    // console.log(schoolId);
     dispatch(getData({ token, schoolId }));
 }, [schoolId, token, dispatch]);
 

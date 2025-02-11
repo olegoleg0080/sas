@@ -21,7 +21,7 @@ export const signin = createAsyncThunk(
             });
             return res.data;
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return ThunkAPI.rejectWithValue("error");
         }
     }
@@ -58,14 +58,14 @@ export const getData = createAsyncThunk(
         try {
             // console.log("try API GET");
             // console.log(token);
-            console.log(schoolId);
+            // console.log(schoolId);
             
             const res = await axios.get(`/data/get/${schoolId}`, {
                 headers: {
                     authorization: `Bearer ${token}`,
                 },
             });
-            console.log(res.data);
+            // console.log(res.data);
             return res.data;
         } catch (error) {
             // console.log(error);

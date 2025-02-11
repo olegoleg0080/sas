@@ -31,7 +31,7 @@ const medSlice = createSlice({
             })
             .addCase(signin.fulfilled, (state, action) => {
                 // console.log("fulfilled token");
-                console.log(action.payload);
+                // console.log(action.payload);
 
                 if (state.token !== action.payload.token) {
                     state.token = action.payload.token;
