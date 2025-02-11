@@ -22,7 +22,7 @@ export const HeaderSelectList = ({ params }) => {
                     onClick={() => {
                         if (key.includes("group")) {
                             navigate(`/sort/${key}?filterGroup=${key}&filterVac=`);
-                        } else if (key.includes("vac")) {
+                        } else if (key == "yes" || key == "no") {
                             navigate(`/sort/${key}?filterGroup=&filterVac=${key}`);
                         }
                     }}

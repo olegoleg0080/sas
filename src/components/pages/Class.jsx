@@ -13,7 +13,7 @@ import {
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { tornRedactModal } from "../../redux/slice";
-import { listSelector, tokenSelector } from "../../redux/selectors";
+import { listSelector, schoolIdSelector, tokenSelector } from "../../redux/selectors";
 import { getData } from "../../API";
 import { useEffect } from "react";
 
@@ -22,15 +22,18 @@ export const Class = () => {
     const theme = useTheme();
     const token = useSelector(tokenSelector);
     const preData = useSelector(listSelector)
+    const schoolId = useSelector(schoolIdSelector);
     const { className } = useParams();
     const [ parallel, parallelClass] = className.split("-")
     
     const data = preData.filter(item => item.class === parallelClass && item.parallel === parseInt(parallel))
     useEffect(() => {
-        
-        dispatch(getData({ token }));
-        
-    }, [token, dispatch]);
+    if (!schoolId || !token || !dispatch) return; // Ждём, пока все данные будут доступны
+
+    console.log(schoolId);
+    dispatch(getData({ token, schoolId }));
+}, [schoolId, token, dispatch]);
+
     const styleTh = {
         border: "none",
         display: "flex;",

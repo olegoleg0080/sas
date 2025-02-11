@@ -106,7 +106,7 @@ export const HeaderSortNav = () => {
                     Щеплення
                 </Button>
                 {isShowVac && (
-                    <HeaderSelectList params={{vac1: "Щеплені", vac2: "Не щеплені"}} />
+                    <HeaderSelectList params={{yes: "Щеплені", no: "Не щеплені"}} />
                 )}
             </Box>
         </Box>

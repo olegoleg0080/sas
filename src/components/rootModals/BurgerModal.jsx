@@ -126,10 +126,10 @@ export const BurgerModal = ({ isOpen, onClose }) => {
                 {/* // */}
                 <Box sx={styleBox}>
                     <ListItemButton sx={styleBtn}>
-                        <NavLink to="/sort/vac1" state={{filterVac: "vac1"}}>Спеціальна</NavLink>
+                        <NavLink to="/sort/yes" state={{filterVac: "yes"}}>Спеціальна</NavLink>
                     </ListItemButton>
                     <ListItemButton sx={styleBtn}>
-                        <NavLink to="/sort/vac2" state={{filterVac: "vac2"}}>Звільнені</NavLink>
+                        <NavLink to="/sort/no" state={{filterVac: "no"}}>Звільнені</NavLink>
                     </ListItemButton>
                 </Box>
             </Box>

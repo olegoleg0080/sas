@@ -1,7 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import persistReducer from "redux-persist/es/persistReducer";
 import storage from "redux-persist/lib/storage";
-import { downloadExcel, getData, getDataById, signin, updateStudent } from "../API";
+import {
+    downloadExcel,
+    getData,
+    getDataById,
+    signin,
+    updateStudent,
+} from "../API";
 
 const medSlice = createSlice({
     name: "med",
@@ -10,6 +16,7 @@ const medSlice = createSlice({
         token: "",
         selectId: "",
         reductStudent: "",
+        schoolId: "",
         showBurgerModal: false,
         showSelectGroup: false,
         showSelectVac: false,
@@ -24,9 +31,12 @@ const medSlice = createSlice({
             })
             .addCase(signin.fulfilled, (state, action) => {
                 // console.log("fulfilled token");
+                console.log(action.payload);
+
                 if (state.token !== action.payload.token) {
                     state.token = action.payload.token;
                 }
+                state.schoolId = action.payload.user.schoolId;
             })
             .addCase(signin.rejected, (_, action) => {
                 // console.log(action);
@@ -38,7 +48,7 @@ const medSlice = createSlice({
             })
             .addCase(getData.fulfilled, (state, action) => {
                 // console.log("got");
-                console.log(action.payload);
+                // console.log(action.payload);
                 if (
                     JSON.stringify(state.list) !==
                     JSON.stringify(action.payload)
@@ -145,6 +155,7 @@ export const {
     tornBurgerModal,
     tornRedactModal,
     login,
+    schoolId,
     tornLoginModal,
 } = medSlice.actions;
 export const medReducer = medSlice.reducer;
@@ -152,7 +163,7 @@ export const medReducer = medSlice.reducer;
 const toDoPersistConfig = {
     key: "root",
     storage: storage,
-    blacklist: ["list", "showRedactModal", "selectId"],
+    blacklist: ["list", "showRedactModal", "selectId", "schoolId"],
 };
 
 export const medPersistReducer = persistReducer(toDoPersistConfig, medReducer);

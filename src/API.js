@@ -1,9 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-axios.defaults.baseURL = "https://sas-db.onrender.com/medApi/";
+// axios.defaults.baseURL = "https://sas-db.onrender.com/medApi/";
 
-// axios.defaults.baseURL = "http://localhost:3001/medApi/";
+axios.defaults.baseURL = "http://localhost:3001/medApi/";
 
 axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
 export const signin = createAsyncThunk(
@@ -21,7 +21,7 @@ export const signin = createAsyncThunk(
             });
             return res.data;
         } catch (error) {
-            // console.log(error);
+            console.log(error);
             return ThunkAPI.rejectWithValue("error");
         }
     }
@@ -54,12 +54,13 @@ export const updateStudent = createAsyncThunk(
 export const getData = createAsyncThunk(
     "medApi/data/getData",
     async (obj, ThunkAPI) => {
-        const { token } = obj;
+        const { token, schoolId } = obj;
         try {
             // console.log("try API GET");
             // console.log(token);
-
-            const res = await axios.get("/data/get", {
+            console.log(schoolId);
+            
+            const res = await axios.get(`/data/get/${schoolId}`, {
                 headers: {
                     authorization: `Bearer ${token}`,
                 },

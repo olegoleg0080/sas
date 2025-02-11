@@ -50,6 +50,7 @@ export const CardClass = ({ obj, type, download }) => {
         group3: "Спеціальна",
         group4: "Звільнений",
     };
+    let num = 0;
     const visibleData = data => {
         const newData = data.filter(item => {
             return item.group === filterGroup || item.vac === filterVac;
@@ -239,7 +240,8 @@ export const CardClass = ({ obj, type, download }) => {
                             >
                                 {visibleData(item.students).length > 0 &&
                                     visibleData(item.students).map(student => {
-                                        console.log(student)
+                                        num+=1
+                                        {/* console.log(student) */}
                                         return (
                                             <TableRow
                                                 key={nanoid()}
@@ -281,7 +283,7 @@ export const CardClass = ({ obj, type, download }) => {
                                                         fontWeight: "500",
                                                     }}
                                                 >
-                                                    1
+                                                    {num}
                                                 </TableCell>
                                                 <TableCell
                                                     sx={{

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import { listSelector, tokenSelector } from "../../redux/selectors";
+import { listSelector, schoolIdSelector, tokenSelector } from "../../redux/selectors";
 import { Box, Button, Container, useTheme } from "@mui/material";
 import { useEffect } from "react";
 import { downloadExcel, getData } from "../../API";
@@ -17,10 +17,14 @@ export const SortByParams = () => {
     const data = useSelector(listSelector);
     const token = useSelector(tokenSelector);
     const theme = useTheme();
-
+    const schoolId = useSelector(schoolIdSelector);
     useEffect(() => {
-        dispatch(getData({ token }));
-    }, [token, dispatch]);
+        if (!schoolId || !token || !dispatch) return; 
+    
+        console.log(schoolId);
+        dispatch(getData({ token, schoolId }));
+    }, [schoolId, token, dispatch]);
+    
     
     useEffect(() => {
         if (state) {
@@ -72,20 +76,22 @@ export const SortByParams = () => {
     const vacMapping = {
         yes: "Щеплений",
         no: "Не щеплений",
-        vac1: "Щеплений",
-        vac2: "Не щеплений",
+        // vac1: "Щеплений",
+        // vac2: "Не щеплений",
     };
 
     const handleDownload = (specificClass = "All") => {
-        const filterKey = filterGroup ? "group" : "vac"; 
-        const filterValue = filterGroup || filterVac || "All"; 
+        const filterKey = filterGroup ? "group" : "vac";
+        const filterValue = filterGroup || filterVac || "All";
 
-        dispatch(downloadExcel({
-            token,
-            filterKey,
-            filterValue,
-            specificClass,
-        }));
+        dispatch(
+            downloadExcel({
+                token,
+                filterKey,
+                filterValue,
+                specificClass,
+            })
+        );
     };
 
     return (
@@ -107,8 +113,8 @@ export const SortByParams = () => {
                 <Button
                     variant="contained"
                     endIcon={<RemoveIcon />}
-                    onClick={()=>{
-                        navigate("/")
+                    onClick={() => {
+                        navigate("/");
                     }}
                     sx={{
                         bgcolor: "transparent",
