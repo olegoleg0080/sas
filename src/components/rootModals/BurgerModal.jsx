@@ -102,7 +102,7 @@ export const BurgerModal = ({ isOpen, onClose }) => {
                     <CloseIcon />
                 </IconButton>
                 <ListItemButton sx={styleLabel}>
-                    <NavLink to="/class">Класи</NavLink>
+                    <NavLink to="/">Класи</NavLink>
                 </ListItemButton>
                 {/* // */}
                 <Typography sx={styleLabel}>Групи</Typography>
@@ -126,10 +126,10 @@ export const BurgerModal = ({ isOpen, onClose }) => {
                 {/* // */}
                 <Box sx={styleBox}>
                     <ListItemButton sx={styleBtn}>
-                        <NavLink to="/sort/yes" state={{filterVac: "yes"}}>Спеціальна</NavLink>
+                        <NavLink to="/sort/yes" state={{filterVac: "yes"}}>Щеплений</NavLink>
                     </ListItemButton>
-                    <ListItemButton sx={styleBtn}>
-                        <NavLink to="/sort/no" state={{filterVac: "no"}}>Звільнені</NavLink>
+                    <ListItemButton sx={ {...styleBtn, textAlign:"left"}}>
+                        <NavLink to="/sort/no" state={{filterVac: "no"}}>Не Щеплений</NavLink>
                     </ListItemButton>
                 </Box>
             </Box>

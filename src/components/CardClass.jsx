@@ -98,7 +98,7 @@ export const CardClass = ({ obj, type, download }) => {
                         <Box
                             sx={{
                                 display: "flex;",
-                                width: type === "group" ? "422px;" : "342px",
+                                width: type === "group" ? "422px;" : "312px",
                                 padding: "10px 30px;",
                                 justifyContent: "space-between;",
                                 alignItems: "center;",
@@ -106,11 +106,11 @@ export const CardClass = ({ obj, type, download }) => {
                                 bgcolor: theme.palette.primary.lightMain,
                                 "@media (min-width: 744px)": {
                                     width:
-                                        type === "group" ? "608px;" : "501px",
+                                        type === "group" ? "608px;" : "468px",
                                 },
                                 "@media (min-width: 1440px)": {
                                     width:
-                                        type === "group" ? "730px;" : "612px",
+                                        type === "group" ? "730px;" : "556px",
                                 },
                             }}
                         >
@@ -156,7 +156,9 @@ export const CardClass = ({ obj, type, download }) => {
                                 }}
                                 variant="contained"
                                 endIcon={<DownloadIcon />}
-                                onClick={()=>{download(`${obj.parallel}-${item.class}`)}}
+                                onClick={() => {
+                                    download(`${obj.parallel}-${item.class}`);
+                                }}
                             >
                                 Отримати дані
                             </Button>
@@ -240,8 +242,10 @@ export const CardClass = ({ obj, type, download }) => {
                             >
                                 {visibleData(item.students).length > 0 &&
                                     visibleData(item.students).map(student => {
-                                        num+=1
-                                        {/* console.log(student) */}
+                                        num += 1;
+                                        {
+                                            /* console.log(student) */
+                                        }
                                         return (
                                             <TableRow
                                                 key={nanoid()}
@@ -305,8 +309,8 @@ export const CardClass = ({ obj, type, download }) => {
                                                             student.group
                                                         ]
                                                             ? groupMapping[
-                                                                student.group
-                                                            ]
+                                                                  student.group
+                                                              ]
                                                             : ""}
                                                     </TableCell>
                                                 )}
